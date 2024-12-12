@@ -1,4 +1,3 @@
-### **English**
 
 # Django E-Commerce Platform
 
@@ -132,7 +131,6 @@ This is a robust e-commerce platform built with Django and Django REST Framework
 
 ---
 
-### **Русский**
 
 # Платформа интернет-магазина на Django
 
