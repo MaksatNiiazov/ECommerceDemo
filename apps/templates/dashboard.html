@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Дашборд{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Добро пожаловать в дашборд</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Пользователи</div>
+                <div class="card-body">
+                    <h5 class="card-title">Общее количество пользователей</h5>
+                    <p class="card-text">10</p>
+                    <a href="{% url 'register' %}" class="btn btn-light">Добавить пользователя</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Адреса</div>
+                <div class="card-body">
+                    <h5 class="card-title">Общее количество адресов</h5>
+                    <p class="card-text">10</p>
+                    <a href="{% url 'address_list' %}" class="btn btn-light">Просмотреть адреса</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Статистика</div>
+                <div class="card-body">
+                    <h5 class="card-title">Другие метрики</h5>
+                    <p class="card-text">Здесь можно добавить другую статистику.</p>
+                    <a href="#" class="btn btn-light">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
