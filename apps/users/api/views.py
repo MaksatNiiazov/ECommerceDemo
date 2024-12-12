@@ -1,6 +1,7 @@
 from rest_framework import generics
-from .models import CustomUser, Address
-from users.api.serializers import UserRegistrationSerializer, UserProfileSerializer, AddressSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+from .serializers import UserRegistrationSerializer, UserProfileSerializer, AddressSerializer
+from ..models import CustomUser, Address
 
 class UserRegistrationView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
@@ -22,3 +23,16 @@ class AddressDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Address.objects.filter(user=self.request.user)
+
+# JWT Views
+class CustomTokenObtainPairView(TokenObtainPairView):
+
+    pass
+
+class CustomTokenRefreshView(TokenRefreshView):
+
+    pass
+
+class CustomTokenVerifyView(TokenVerifyView):
+
+    pass 
