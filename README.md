@@ -75,8 +75,8 @@ This is a robust e-commerce platform built with Django and Django REST Framework
 #### **Steps**
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/your-username/your-repo-name.git](https://github.com/MaksatNiiazov/ECommerceDemo.git
+   cd ECommerceDemo
    ```
 
 2. **Set Up Virtual Environment**:
@@ -115,7 +115,7 @@ This is a robust e-commerce platform built with Django and Django REST Framework
 
 8. **Run Celery Worker**:
    ```bash
-   celery -A your_project_name worker --loglevel=info
+   celery -A ECommerceDemo worker --loglevel=info
    ```
 
 ---
