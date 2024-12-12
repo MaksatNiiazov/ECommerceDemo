@@ -4,6 +4,8 @@ from .views import (UserRegistrationView, UserProfileView, AddressCreateView, Ad
                     DashboardView, LoginView, LogoutView)
 
 urlpatterns = [
+    path('api/', include('apps.users.api.urls')),
+
     path('addresses/create/', AddressCreateView.as_view(), name='address_create'),
     path('addresses/update/<int:pk>/', AddressUpdateView.as_view(), name='address_update'),
     path('addresses/delete/<int:pk>/', AddressDeleteView.as_view(), name='address_delete'),

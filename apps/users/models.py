@@ -7,19 +7,19 @@ class CustomUser(AbstractUser):
 
     groups = models.ManyToManyField(
         'auth.Group',
-        related_name='customuser_set',
+        related_name='custom_users',
         blank=True,
-        help_text=_('The groups this user belongs to. A user will get all permissions granted to each of their groups.'),
+        help_text=_(
+            'The groups this user belongs to. A user will get all permissions granted to each of their groups.'),
         verbose_name=_('groups')
     )
     user_permissions = models.ManyToManyField(
         'auth.Permission',
-        related_name='customuser_set',
+        related_name='custom_users_permissions',
         blank=True,
         help_text=_('Specific permissions for this user.'),
         verbose_name=_('user permissions')
     )
-
     def __str__(self):
         return self.email
 

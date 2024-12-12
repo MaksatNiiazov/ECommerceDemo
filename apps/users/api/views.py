@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from .serializers import UserRegistrationSerializer, UserProfileSerializer, AddressSerializer
 from ..models import CustomUser, Address
@@ -10,11 +10,14 @@ class UserRegistrationView(generics.CreateAPIView):
 
 
 class UserProfileView(generics.RetrieveUpdateAPIView):
-    queryset = CustomUser.objects.all()
     serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
 
 
-class AddressListCreateView(generics.ListCreateAPIView):
+class AddressListCreateView(generics.CreateAPIView):
     serializer_class = AddressSerializer
 
     def get_queryset(self):

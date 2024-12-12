@@ -7,7 +7,7 @@
     <h1>Профиль пользователя</h1>
     <form method="post">
         {% csrf_token %}
-        {% include 'users/partials/_form_errors.html' %}
+        {% include 'includes/form_errors.html' %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Сохранить изменения</button>
     </form>

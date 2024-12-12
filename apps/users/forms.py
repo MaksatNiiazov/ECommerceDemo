@@ -1,9 +1,16 @@
 from django import forms
 from .models import CustomUser, Address
 
+
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    password_confirm = forms.CharField(widget=forms.PasswordInput)  # Поле для подтверждения пароля
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль'}),
+        label="Пароль"
+    )
+    password_confirm = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Повторите пароль'}),
+        label="Подтверждение пароля"
+    )
 
     class Meta:
         model = CustomUser
@@ -16,6 +23,14 @@ class UserRegistrationForm(forms.ModelForm):
 
         if password and password_confirm and password != password_confirm:
             raise forms.ValidationError("Пароли не совпадают.")
+        return cleaned_data
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
