@@ -2,12 +2,18 @@ from rest_framework import serializers
 from ..models import CustomUser, Address
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+    password_confirm = serializers.CharField(write_only=True)
+
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'email', 'password', 'password_confirm']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
+        if validated_data['password'] != validated_data['password_confirm']:
+            raise serializers.ValidationError({"password": "Пароли не совпадают."})
+
         user = CustomUser(**validated_data)
         user.set_password(validated_data['password'])
         user.save()

@@ -1,11 +1,16 @@
 from django.contrib import admin
 from django.urls import path, include
-from users.api.views import UserRegistrationView, UserProfileView, AddressListCreateView, AddressDetailView
+from .views import (UserRegistrationView, UserProfileView, AddressCreateView, AddressUpdateView, AddressDeleteView,
+                    DashboardView, LoginView, LogoutView)
 
 urlpatterns = [
+    path('addresses/create/', AddressCreateView.as_view(), name='address_create'),
+    path('addresses/update/<int:pk>/', AddressUpdateView.as_view(), name='address_update'),
+    path('addresses/delete/<int:pk>/', AddressDeleteView.as_view(), name='address_delete'),
+    path('dashboard/', DashboardView.as_view(), name='dashboard'),
     path('register/', UserRegistrationView.as_view(), name='register'),
-    path('profile/<int:pk>/', UserProfileView.as_view(), name='profile'),
-    path('addresses/', AddressListCreateView.as_view(), name='address-list-create'),
-    path('addresses/<int:pk>/', AddressDetailView.as_view(), name='address-detail'),
-    path('api/', include('users.api.urls')),
-] 
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('profile/', UserProfileView.as_view(), name='profile'),
+
+]
