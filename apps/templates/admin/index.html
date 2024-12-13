@@ -1,0 +1,99 @@
+{% extends 'unfold/layouts/base_simple.html' %}
+
+{% load cache i18n %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}
+    {% if subtitle %}
+        {{ subtitle }} |
+    {% endif %}
+
+    {{ title }} | {{ site_title|default:_('Django site admin') }}
+{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name">
+        <a href="{% url 'admin:index' %}">
+            {{ site_header|default:_('Django administration') }}
+        </a>
+    </h1>
+{% endblock %}
+
+{% block content %}
+    <div class="flex flex-col gap-8 lg:flex-row">
+    <!-- Виджет трендовых продуктов -->
+    <div class="border flex flex-col flex-grow overflow-hidden p-6 relative rounded-md shadow-sm dark:border-gray-800 lg:w-1/2">
+        <h2 class="bg-gray-50 border-b font-semibold mb-6 -mt-6 -mx-6 py-4 px-6 text-font-important-light dark:text-font-important-dark dark:border-gray-800 dark:bg-white/[.02]">
+            The most trending products in last 2 weeks
+        </h2>
+
+        <div class="flex-grow relative">
+            <div class="font-semibold text-2xl text-font-important-light tracking-tight dark:text-font-important-dark mb-2">
+                $1,234,567.89
+            </div>
+            <p class="leading-relaxed mb-0 text-sm">
+                Total revenue between <strong class="font-semibold text-font-important-light dark:text-font-important-dark">1 - 31 October</strong>. 
+                Increase <span class="text-green-700 font-semibold dark:text-green-400">+3.14%</span> comparing to previous month <strong class="font-semibold text-font-important-light dark:text-font-important-dark">1 - 30 September</strong>.
+            </p>
+            <div class="bg-gray-200 dark:bg-gray-800 h-px my-6"></div>
+
+            <!-- Список трендовых продуктов -->
+            <div class="flex flex-col gap-5">
+                <div>
+                    <div class="overflow-hidden relative px-2 py-1 text-sm">
+                        <div class="absolute bottom-0 left-0 rounded top-0 bg-primary-100 z-10 dark:bg-primary-500/20" style="width: 20%"></div>
+                        <div class="flex flex-row relative z-20">
+                            <h3 class="text-font-default-light dark:text-font-default-dark text-sm">🦆 Social marketing e-book</h3>
+                            <strong class="font-semibold text-font-important-light ml-auto dark:text-font-important-dark">$3,343.67</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="overflow-hidden relative px-2 py-1 text-sm">
+                        <div class="absolute bottom-0 left-0 rounded top-0 bg-primary-100 z-10 dark:bg-primary-500/20" style="width: 72%"></div>
+                        <div class="flex flex-row relative z-20">
+                            <h3 class="text-font-default-light dark:text-font-default-dark text-sm">🦍 Freelancing tasks</h3>
+                            <strong class="font-semibold text-font-important-light ml-auto dark:text-font-important-dark">$2,839.06</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="overflow-hidden relative px-2 py-1 text-sm">
+                        <div class="absolute bottom-0 left-0 rounded top-0 bg-primary-100 z-10 dark:bg-primary-500/20" style="width: 17%"></div>
+                        <div class="flex flex-row relative z-20">
+                            <h3 class="text-font-default-light dark:text-font-default-dark text-sm">🐋 Development coaching</h3>
+                            <strong class="font-semibold text-font-important-light ml-auto dark:text-font-important-dark">$3,656.60</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-200 dark:bg-gray-800 h-px my-6"></div>
+            <div class="flex flex-row mt-6 justify-center">
+                <a href="#" class="border font-medium px-3 py-2 rounded-md text-center whitespace-nowrap bg-white dark:border-gray-700 dark:bg-transparent dark:text-white">
+                    View detailed analytics
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Второй виджет: Здоровье системы -->
+    <div class="border flex flex-col flex-grow overflow-hidden p-6 relative rounded-md shadow-sm dark:border-gray-800 lg:w-1/2">
+        <div class="flex-grow relative">
+            <div class="flex flex-row items-center mb-2">
+                <h3 class="font-semibold text-font-important-light dark:text-font-important-dark">Current system health</h3>
+                <div class="ml-auto">83%</div>
+            </div>
+            <ul class="flex flex-row gap-0.5 overflow-hidden rounded">
+                <li class="h-8 px-px size-full bg-gray-300 dark:bg-gray-400 hover:opacity-50" title="None"></li>
+                <li class="h-8 px-px size-full bg-primary-300 dark:bg-primary-600 hover:opacity-50" title="Value 3"></li>
+                <li class="h-8 px-px size-full bg-primary-500 dark:bg-primary-400 hover:opacity-50" title="Value 5"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

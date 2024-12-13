@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container mt-5">
+        <h1 class="mb-4 text-center">Product List</h1>
+
+        <!-- Product List -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for product in products %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <!-- Product Image -->
+                    <img src="{{ product.product_images.first.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    
+                    <div class="card-body">
+                        <!-- Product Name -->
+                        <h5 class="card-title">{{ product.name }}</h5>
+
+                        <!-- Category -->
+                        <p class="card-text text-muted">
+                            <strong>Category:</strong> {{ product.category.name }}
+                        </p>
+
+                        <!-- Colors -->
+                        <p class="card-text">
+                            <strong>Colors:</strong>
+                            {% for product_image in product.product_images.all %}
+                                <span class="badge text-bg-secondary">{{ product_image.color.name }}</span>
+                            {% endfor %}
+                        </p>
+
+                        <!-- Extra Fields -->
+                        <p class="card-text">
+                            <strong>Extra Fields:</strong>
+                            {% for extra_field in product.extra_fields.all %}
+                                <span class="badge text-bg-info">{{ extra_field.key }}</span>
+                            {% endfor %}
+                        </p>
+                    </div>
+
+                    <div class="card-footer">
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary w-100">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+{% include 'includes/pagination.html' %}
+    </div>
+
+{% endblock content %}

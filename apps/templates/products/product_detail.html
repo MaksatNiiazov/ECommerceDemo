@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+        <!-- Название продукта -->
+        <h1 class="text-center mb-4">{{ product.name }}</h1>
+
+        <div class="row g-4">
+            <!-- Изображения продукта -->
+<div class="col-md-6">
+    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% if product.product_images.all|length > 0 %}
+                {% for image in product.product_images.all %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ image.image.url }}" class="d-block w-100 rounded" alt="{{ product.name }}">
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="carousel-item active">
+                    <img src="{% static 'imgs/placeholder.webp' %}" class="d-block w-100 rounded" alt="placeholder">
+                </div>
+            {% endif %}
+        </div>
+
+        {% if product.product_images.all|length > 1 %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        {% endif %}
+    </div>
+</div>
+
+            <!-- Детали продукта -->
+            <div class="col-md-6">
+                <h3 class="mb-3">Product Details</h3>
+                <p><strong>Category:</strong> {{ product.category.name }}</p>
+
+                <p><strong>Colors:</strong></p>
+                <ul class="list-inline">
+                    {% for product_image in product.product_images.all %}
+                    <li class="list-inline-item">
+                        <span class="badge text-bg-secondary">{{ product_image.color.name }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Доступные варианты -->
+                <h4 class="mt-4">Available Variants</h4>
+                <form method="post" action="#">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+
+                    <div class="mb-3">
+                        <label for="variantSelect" class="form-label">Select a Variant</label>
+                        <select id="variantSelect" name="variant_id" class="form-select">
+                            {% for variant in product.product_images.all %}
+                            <option value="{{ variant.id }}">
+                                {{ variant.color.name }} - {{ variant.size.name }} - ${{ variant.price }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Описание продукта -->
+        <div class="mt-5">
+            <h3>Description</h3>
+            <p>{{ product.description }}</p>
+        </div>
+
+        <!-- Кнопка возврата -->
+        <a href="{% url 'product_list' %}" class="btn btn-secondary mt-4">Back to Products</a>
+    </div>
+{% endblock content %}
